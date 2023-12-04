@@ -18,13 +18,13 @@ function App() {
     const fetchWeather = async () => {
 
       try {
-        await getFormattedWeatherData({ ...query, units }).then((data) => {
+        await getFormattedWeatherData({ ...query, units }).then((city) => {
           toast.success(
-            `Successfully fetched weather data for ${data.name}, ${data.country}.`, { position: toast.POSITION.TOP_LEFT });
-          setWeather(data);
+            `Successfully fetched weather data for ${city.name}, ${city.country}.`, { position: toast.POSITION.TOP_LEFT });
+          setWeather(city);
         });
       } catch (e) {
-        toast.info("Sorry! Something went wrong. Please try again");
+        toast.error("Sorry! Something went wrong. Please try again", { position: toast.POSITION.TOP_LEFT });
       }
     };
 
