@@ -17,12 +17,15 @@ function App() {
   useEffect(() => {
     const fetchWeather = async () => {
 
-      await getFormattedWeatherData({ ...query, units }).then((data) => {
-        toast.success(
-          `Successfully fetched weather data for ${data.name}, ${data.country}.`, { position: toast.POSITION.TOP_LEFT });
-
-        setWeather(data);
-      });
+      try {
+        await getFormattedWeatherData({ ...query, units }).then((data) => {
+          toast.success(
+            `Successfully fetched weather data for ${data.name}, ${data.country}.`, { position: toast.POSITION.TOP_LEFT });
+          setWeather(data);
+        });
+      } catch (e) {
+        toast.info("Sorry! Something went wrong. Please try again");
+      }
     };
 
     fetchWeather();
@@ -53,7 +56,7 @@ function App() {
         </div>
       )}
 
-      <ToastContainer autoClose={5000} theme="colored" newestOnTop={true} />
+      <ToastContainer autoClose={2000} theme="colored" newestOnTop={true} />
     </div>
   );
 }
